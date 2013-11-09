@@ -1,0 +1,73 @@
+{% extends 'Pages/base.html' %}
+
+<!--header-->
+{% block header %}
+    <div class="page-header my_header">
+        <div class="my_header_content">
+            <div class="container">
+                <div class="header_text">
+                    <div class="row">
+                        <div class="span9">
+                            <div class="header_slogan">
+                                <h4 >Делаете ставки на сегодняшнюю игру?</h4>
+                                <h4>Узнайте мнение проффессиональных аналитиков!</h4>
+{#                                <a class="button" href="/review">Отзывы</a>#}
+                            </div>
+                        </div>
+                        <div class="span3">
+                            <div class="my_auth">
+                                <span><a href="">Войти в личный кабинет</a></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+<!--top content-->
+{#{% block top_content %}#}
+{#        <div class="span12 midle_slogan">#}
+{#            <div class="slogan">Войти в личный кабинет</div>#}
+{#        </div>#}
+{#{% endblock %}#}
+
+<!--middle content-->
+{% block middle_content %}
+    <div class="span12 slogan_content">
+        <h3 class="slogan_h1">Статистика лучших аналитиков</h3>
+    </div>
+    <div class="span12">
+        <div class="row">
+            <div class="span7 main_post_padding">
+                {% for page in last_pages %}
+                    {% if page.page_in_main %}
+                            <div class="row top_analitic">
+                                <div class="span2">
+                                    <img src="{{ page.image.url }}">
+                                </div>
+                                <div class="span5">
+                                    <h5>{{ page.title }}</h5>
+{#                                    <p class="datetime">{{ page.datetime }}</p>#}
+                                    <p>{{ page.content|removetags:"img"|truncatewords:"30"|safe }}<p>
+                                    <a class="button2" href="{{ page.get_absolute_url }}">читать</a>
+                                </div>
+                            </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="span5">
+                <div class="main_post_separator sidebar">
+                    <h2>Подробнее о сервисе</h2>
+                    <ul>
+                    {% for page in last_pages %}
+                        <li><a href="{{ page.get_absolute_url }}">{{ page.title }}</a></li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
